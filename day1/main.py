@@ -1,5 +1,3 @@
-
-
 def main():
     with open('input.txt', 'r') as file:
         inpt = file.read()
