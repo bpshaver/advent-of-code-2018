@@ -39,8 +39,6 @@ class Observation():
     def __repr__(self):
         return f"{self.time}: {self.note}"
 
-
-
 class Guard():
     def __init__(self, id):
         self.id = int(id)
@@ -50,13 +48,6 @@ class Guard():
 
     def __repr__(self):
         return f"Guard #{self.id}"
-
-    def make_note(self, status, time):
-        if status == 'awake':
-            self.awake_times.append(time)
-        elif status == 'asleep':
-            self.asleep_times.append(time)
-
 
 def time_generator(start_time, end_time):
     """"
