@@ -19,7 +19,6 @@ def main():
             num_doubles += 1
         if 3 in c.values():
             num_triples += 1
-            
     checksum = num_doubles * num_triples
 
     # Part 2
@@ -32,8 +31,6 @@ def main():
     results.sort(key = lambda x: x[1])
     common_letters = results[0][0]
     
-
-
     return checksum, common_letters
 
 if __name__ == '__main__':
