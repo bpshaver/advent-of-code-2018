@@ -20,12 +20,12 @@ def parse_claim(claim):
 
     return dict(id=id, left=left, top=top, width=width, length=length)
 
-def main():
-    with open('input.txt', 'r') as file:
+def main(inpt='input.txt', width=1000, length=1000):
+    with open(inpt, 'r') as file:
         claims = file.read().strip().split('\n')
 
     # Part 1
-    fabric = np.zeros((LENGTH, WIDTH))
+    fabric = np.zeros((width, length), dtype=int)
 
     for claim in claims:
         claim = parse_claim(claim)
@@ -33,10 +33,16 @@ def main():
             for column in range(claim['width']):
                 fabric[(row + claim['top'], column + claim['left'])] += 1
 
-    bool_fabric = np.vectorize(bool)(fabric)
+
+    bool_fabric = np.vectorize(lambda x: x > 1)(fabric)
     num_covered = np.sum(bool_fabric)
 
-    plt.imshow(fabric, cmap='seismic_r', interpolation='nearest')
+    plt.imshow(fabric, cmap='Reds_r', interpolation='nearest')
+    plt.xticks([])
+    plt.yticks([])
+    plt.title('Santa\'s Contested Magical Fabric')
+    if inpt == 'input.txt':
+        plt.savefig('SantaFabric.png')
     plt.show()
 
 
@@ -44,5 +50,6 @@ def main():
     return num_covered, _
 
 if __name__ == '__main__':
+    # num_covered, _ = main('test.txt', width=8, length=8)
     num_covered, _ = main()
     print(num_covered)
