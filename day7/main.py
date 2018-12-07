@@ -73,7 +73,7 @@ class Node2():
     def get_duration(self):
         return ascii_uppercase.index(self.ID) + 1 + self.offset
     
-def vprint(string, verbose=True):
+def vprint(string, verbose=False):
     if verbose:
         print(string)
 
@@ -89,7 +89,7 @@ def generate_graph2(instructions, offset=0):
         nodes[child].parents.append(parent)
     return nodes
 
-def do_work(nodes, num_workers, verbose):
+def do_work(nodes, num_workers, verbose=False):
     workers = dict.fromkeys(range(num_workers))
     done = ''
     second = 0
@@ -165,5 +165,5 @@ if __name__ == '__main__':
 
     inpt = read_input()
     nodes = generate_graph2(inpt,offset=60)
-    done, seconds = do_work(nodes, num_workers=5, verbose=True)
+    done, seconds = do_work(nodes, num_workers=5)
     print(f"Answer to part 2: {seconds}")
