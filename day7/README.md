@@ -34,7 +34,7 @@ Done:
 
 3
 
-node C finished!
+Node C finished!
 
 Available nodes: [node: F, Started: False, Duration: 6, Parents: [], Children: ['E'], node: A, Started: False, Duration: 1, Parents: [], Children: ['B', 'D']]
 
@@ -52,7 +52,7 @@ Done: C
 
 4
 
-node A finished!
+Node A finished!
 
 Available nodes: [node: D, Started: False, Duration: 4, Parents: [], Children: ['E'], node: B, Started: False, Duration: 2, Parents: [], Children: ['E']]
 
@@ -80,7 +80,7 @@ Done: CA
 
 6
 
-node B finished!
+Node B finished!
 
 Available nodes: [node: D, Started: False, Duration: 4, Parents: [], Children: ['E']]
 
@@ -120,7 +120,7 @@ Done: CAB
 
 9
 
-node F finished!
+Node F finished!
 
 Available nodes: []
 
@@ -132,7 +132,7 @@ Done: CABF
 
 10
 
-node D finished!
+Node D finished!
 
 Available nodes: [node: E, Started: False, Duration: 5, Parents: [], Children: []]
 
@@ -186,7 +186,7 @@ Done: CABFD
 
 15
 
-node E finished!
+Node E finished!
 
 Available nodes: []
 

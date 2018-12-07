@@ -102,7 +102,7 @@ def do_work(nodes, num_workers, verbose=False):
                 # Let the decrementing happen with the workers
                 if node.duration == 0:
                     # The node is finished!
-                    vprint(f"node {node.ID} finished!", verbose=verbose)
+                    vprint(f"Node {node.ID} finished!", verbose=verbose)
                     node.finished = True
                     # Add the node id to the "path" of finished nodes
                     done = done + node.ID
