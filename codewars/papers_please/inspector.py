@@ -61,7 +61,7 @@ class Inspector():
         if entrant['citizen']:
             return 'Glory to Arstotzka.'
         else:
-            return 'Cause no trousble.'
+            return 'Cause no trouble.'
 
     def _fail(self, entrant: Dict, check: str, reason: str) -> str:
         return reason
