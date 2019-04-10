@@ -3,7 +3,10 @@ from typing import Dict, List, Tuple
 
 class Inspector():
     def __init__(self) -> None:
-        self.state_dict: Dict = {}
+        self.state_dict: Dict = {
+            'allowed_countries': [],
+            'denied_countries': []
+        }
 
     def receive_bulletin(self, bulletin: str) -> None:
         """
@@ -23,7 +26,7 @@ class Inspector():
         instructions: List = self._parse_bulletin(bulletin)
         for instruction in instructions:
             # Updates to the list of nations:
-            if instruction.startswith('Allow citiens') or \
+            if instruction.startswith('Allow citizens') or \
                instruction.startswith('Deny citizens'):
                 self._update_list_of_nations(instruction)
             # Update to a currently wanted criminal:
@@ -75,22 +78,27 @@ class Inspector():
 
     @staticmethod
     def _parse_bulletin(bulletin: str) ->  List:
-        return bulletin.strip().split('\n')
+        return [instruction.strip() for instruction in bulletin.strip().split('\n')]
 
-    @staticmethod
-    def _update_list_of_nations(instruction: str) -> None:
+    def _update_list_of_nations(self, instruction: str) -> None:
+        if instruction.startswith('Allow citizens'):
+            allowed_countries = instruction.lstrip('Allow citizens of ')
+            self.state_dict['allowed_countries'].extend(
+                [country.strip().capitalize() for country in allowed_countries.split(',')])
+        elif instruction.startswith('Deny citizens'):
+            denied_countries = instruction.lstrip('Deny citizens of ')
+            self.state_dict['denied_countries'].extend(
+                [country.strip().capitalize() for country in denied_countries.split(',')])
+        else:
+            raise NotImplementedError(f'Can\'t hanle input: {instruction}')
+
+    def _update_wanted_by_the_state(self, instruction: str) -> None:
         raise NotImplementedError(f'Can\'t hanle input: {instruction}')
 
-    @staticmethod
-    def _update_wanted_by_the_state(instruction: str) -> None:
+    def _update_required_vaccinations(self, instruction: str) -> None:
         raise NotImplementedError(f'Can\'t hanle input: {instruction}')
 
-    @staticmethod
-    def _update_required_vaccinations(instruction: str) -> None:
-        raise NotImplementedError(f'Can\'t hanle input: {instruction}')
-
-    @staticmethod
-    def _update_required_documents(instruction: str) -> None:
+    def _update_required_documents(self, instruction: str) -> None:
         raise NotImplementedError(f'Can\'t hanle input: {instruction}')
 
     def _check_required_docs(self, entrant: Dict) -> Tuple[bool, str]:
