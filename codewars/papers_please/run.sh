@@ -1,1 +1,1 @@
-docker run -it --rm inspector.py
+docker run -it --rm papers inspector.py

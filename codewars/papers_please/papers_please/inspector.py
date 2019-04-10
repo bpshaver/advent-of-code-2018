@@ -38,7 +38,7 @@ class Inspector():
             else:
                 raise LookupError(f'Unexpected input: {instruction}')
 
-    def inspect(self, input_entrant: Dict) -> None:
+    def inspect(self, input_entrant: Dict) -> str:
         entrant: Dict = {key.strip():self._str_to_dict(value)
                          for key, value  in input_entrant.items()}
 
@@ -55,7 +55,9 @@ class Inspector():
                 self._fail(entrant, check=check, reason=reason)
                 break
         else:
-            self._pass(entrant)
+            result = self._pass(entrant)
+
+        return result
 
     def _pass(self, entrant: Dict) -> str:
         if entrant['citizen']:
@@ -122,4 +124,5 @@ if __name__ == '__main__':
     }
 
     inspector = Inspector()
-    inspector.inspect(entrant1)
+    result = inspector.inspect({'passport':"NATION: Russia"})
+    assert result.startswith('Denied')
