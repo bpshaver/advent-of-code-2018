@@ -10,9 +10,6 @@ class Inspector():
 
     def receive_bulletin(self, bulletin: str) -> None:
         """
-        Updates to the list of nations (comma-separated if more than one) whose citizens may enter (begins empty, before the first bulletin):
-            example 1: Allow citizens of Obristan
-            example 2: Deny citizens of Kolechia, Republia
         Updates to required documents
             example 1: Foreigners require access permit
             example 2: Citizens of Arstotzka require ID card
@@ -81,6 +78,11 @@ class Inspector():
         return [instruction.strip() for instruction in bulletin.strip().split('\n')]
 
     def _update_list_of_nations(self, instruction: str) -> None:
+        """Updates to the list of nations (comma-separated if more than one) whose citizens
+        may enter (begins empty, before the first bulletin):
+        example 1: Allow citizens of Obristan
+        example 2: Deny citizens of Kolechia, Republia
+        """
         if instruction.startswith('Allow citizens'):
             allowed_countries = instruction.lstrip('Allow citizens of ')
             self.state_dict['allowed_countries'].extend(
@@ -118,19 +120,3 @@ class Inspector():
 
     def _check_foreigner_paperwork(self, entrant: Dict) -> Tuple[bool, str]:
         raise NotImplementedError(f'Unable to perform check_foreigner_paperwork yet')
-
-if __name__ == '__main__':
-
-    entrant1 = {
-        "passport": """ID#: GC07D-FU8AR
-        NATION: Arstotzka
-        NAME: Guyovich, Russian
-        DOB: 1933.11.28
-        SEX: M
-        ISS: East Grestin
-        EXP: 1983.07.10"""
-    }
-
-    inspector = Inspector()
-    result = inspector.inspect({'passport':"NATION: Russia"})
-    assert result.startswith('Denied')
