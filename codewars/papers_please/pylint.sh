@@ -1,0 +1,1 @@
+docker run --rm papers -m pylint inspector.py
