@@ -1,1 +1,1 @@
-docker run --rm papers -m mypy inspector.py
+docker run -it --rm papers -m mypy inspector.py

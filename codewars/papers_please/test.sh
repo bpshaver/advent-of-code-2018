@@ -1,1 +1,1 @@
-docker run --rm papers -m pytest
+docker run -it --rm papers -m pytest

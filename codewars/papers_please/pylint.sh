@@ -1,1 +1,1 @@
-docker run --rm papers -m pylint inspector.py
+docker run -it --rm papers -m pylint inspector.py
